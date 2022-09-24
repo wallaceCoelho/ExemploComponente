@@ -6,12 +6,19 @@ import Dados from './components/Dados';
 export default function App() {
 
   const [name, setName] = useState("");
-  
+  const [nameValue, setNameValue] = useState("");
+  const [age, setAge] = useState("");
+  const [ageValue, setAgeValue] = useState("");
+
+  function showData() {
+    setNameValue(name);
+    setAgeValue(age);
+  }
 
   return (
     <View style={styles.container}>
 
-      <View style={styles.blocoInput}>
+      <View style={styles.boxInput}>
         <Text style={styles.label}>Nome:</Text>
         <TextInput
           style={styles.input}
@@ -20,16 +27,26 @@ export default function App() {
         />
       </View>
 
-      <View style={styles.blocoInputTwo}>
+      <View  style={styles.boxInput}>
+        <Text style={styles.label}>Idade:</Text>
+        <TextInput
+          style={styles.input}
+          value={age}
+          onChangeText={(value) => setAge(value)}
+        />
+      </View>
+
+      <View style={styles.boxInputTwo}>
         <TouchableOpacity style={styles.btn}>
           <Text style={styles.btnText}
-                onPress={() => monstrar()}
+                onPress={showData}
           >Mostrar</Text>
         </TouchableOpacity>
       </View>
 
-      <View style={styles.blocoInputThree}>
-        <Dados name="Maria"/>
+      <View style={styles.boxInputThree}>
+        {/* CHAMADA DE COMPONENTE */}
+        <Dados name={nameValue} age={ageValue}/>
       </View>
 
     </View>
@@ -39,20 +56,20 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'center'
   },
 
-  blocoInput: {
-    marginTop: 200,
+  boxInput: {
     marginHorizontal: 40
   },
 
-  blocoInputTwo: {
+  boxInputTwo: {
     flex: 0,
     marginTop: 30,
     alignItems: 'center'
   },
 
-  blocoInputThree: {
+  boxInputThree: {
     marginHorizontal: 40,
     marginTop: 30
   },
